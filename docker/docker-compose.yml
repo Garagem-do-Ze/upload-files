@@ -1,0 +1,13 @@
+version: "3"
+services:
+  upfiles:
+    container_name: upfiles
+    image: upfiles   
+    build: ../upfiles/.
+    environment:
+      - DJANGO_SETTINGS_MODULE=upfiles.settings
+    volumes:
+      - ../upfiles:/app-backend
+    restart: always
+    ports:
+      - 8071:8071
