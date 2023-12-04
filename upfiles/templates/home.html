@@ -1,13 +1,34 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Sistema de Upload de Documentos - Garagem do Zé{% endblock %}
 
 {% block content %}
+
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
+  Olá, {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
+  {% if user.username == 'upload' %}
+    <p>Você deseja fazer upload de um documento?</p>
+    <p>Para enviar um documento, é necessário preencher primeiro nome e sobrenome:</p>
+    <form action="{% url 'up' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <br>
+      <p>Nome: <input type="text" name="firstName"></p>
+      <p>Sobrenome: <input type="text" name="secondName"></p>
+      <br>
+      <p>Nome do Documento: <input type="text" name="firstName"></p>
+      <p>Selecione o arquivo:
+        <input type="file" name="gzeDocument">
+      </p>
+      <p><button type="submit">Upload</button></p>
+    </form>
+    {% if uploaded_file_url %}
+      <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    {% endif %}
+  {% endif %}
+  {% else %}
   <p>Você não está logado</p>
   <a href="{% url 'login' %}">Log In</a>
 {% endif %}
+
 {% endblock %}
