@@ -10,33 +10,20 @@ def index(request):
 
 def up(request):
     if request.method == 'POST':
-        print('yes is post')
-        # form = DocumentForm(request.POST, request.FILES)
-        form = DocumentForm(request.POST)
-
-        # print(form)
-
+        form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            print('first_name')
-            # print(form.fields['first_name'])
-            print(form.cleaned_data['first_name'])
-            # newdoc = Document(docfile = request.FILES['docfile'])
-            # newdoc.save()
-
-            # Redirect to the document list after POST
+            print (form.cleaned_data['docname'])
+            newdoc = Document(first_name=form.cleaned_data['first_name'], second_name=form.cleaned_data['second_name'], docname=form.cleaned_data['docname'], docfile = request.FILES['docfile'])
+            newdoc.save()
             return HttpResponseRedirect('')
         else:
-            print('noooo, form is invalid!!!')
+            print (form.cleaned_data['first_name'])
+            print (form.cleaned_data['second_name'])
+            print (form.cleaned_data['docname'])
+            
     else:
-        form = DocumentForm() # A empty, unbound form
-
+        form = DocumentForm()
     documents = Document.objects.latest('docfile')
-    # print('documents:')
-    # print(documents)
-    # print('\nform:')
-    # print(form)
-
-    # Render list page with the documents and the form
     return render(
         request,
         'success/index.html',
