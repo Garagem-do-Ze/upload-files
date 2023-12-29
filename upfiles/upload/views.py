@@ -1,11 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from .forms import DocumentForm
 from django.template import RequestContext
-
-from .models import Document
 from .forms import DocumentForm
+from .models import Document
 
 def index(request):
     context = {"a":"a"}
@@ -13,18 +10,31 @@ def index(request):
 
 def up(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        print('yes is post')
+        # form = DocumentForm(request.POST, request.FILES)
+        form = DocumentForm(request.POST)
+
+        # print(form)
+
         if form.is_valid():
-            newdoc = Document(docfile = request.FILES['docfile'])
-            newdoc.save()
+            print('first_name')
+            # print(form.fields['first_name'])
+            print(form.cleaned_data['first_name'])
+            # newdoc = Document(docfile = request.FILES['docfile'])
+            # newdoc.save()
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('upload.views.up'))
+            return HttpResponseRedirect('')
+        else:
+            print('noooo, form is invalid!!!')
     else:
         form = DocumentForm() # A empty, unbound form
 
-    # Load documents for the list page
-    documents = Document.objects.all()
+    documents = Document.objects.latest('docfile')
+    # print('documents:')
+    # print(documents)
+    # print('\nform:')
+    # print(form)
 
     # Render list page with the documents and the form
     return render(
