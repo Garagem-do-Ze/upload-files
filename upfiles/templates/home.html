@@ -7,7 +7,7 @@
 {% if user.is_authenticated %}
   Olá, {{ user.username }}!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
-  {% if user.username == 'upload' %}
+  {% if user.username == 'cliente' %}
     <p>Você deseja fazer upload de um documento?</p>
     <p>Para enviar um documento, é necessário preencher primeiro nome e sobrenome:</p>
     <form action="{% url 'up' %}" method="post" enctype="multipart/form-data">
