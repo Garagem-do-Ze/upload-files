@@ -26,6 +26,9 @@
   {% else %}
   <p>Você não está logado</p>
   <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+  <script>
+    location = "{% url 'login' %}";
+  </script>  
+  {% endif %}
 
 {% endblock %}
