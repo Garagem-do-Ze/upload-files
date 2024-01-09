@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
 {% block title %}Sistema de Upload de Documentos - Garagem do Zé{% endblock %}
-
 {% block content %}
 
 {% if user.is_authenticated %}
-  Olá, {{ user.username }}!
+  Olá, {{ user.username }}.
   <p><a href="{% url 'logout' %}">Log Out</a></p>
   {% if user.username == 'cliente' %}
     <p>Você deseja fazer upload de um documento?</p>
