@@ -2,19 +2,21 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
-<h2>Olá, {{ user.username }}. </h2>
-<h1>
-  Documento enviado com sucesso!
-</h1>
-<p><a href="{% url 'home' %}">Enviar novo docmento</a></p>
-<p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-<p>Você não está logado</p>
-<a href="{% url 'login' %}">Log In</a>
-<script>
-  location = "{% url 'login' %}";
-</script>  
-{% endif %}
+<div style="padding:10%">
+  {% if user.is_authenticated %}
+  <h2>Olá, {{ user.username }}. </h2>
+  <h1>
+    Documento enviado com sucesso!
+  </h1>
+  <p><a href="{% url 'home' %}">Enviar novo docmento</a></p>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  {% else %}
+  <p>Você não está logado</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <script>
+    location = "{% url 'login' %}";
+  </script>  
+  {% endif %}
+</div>
 
 {% endblock %}
