@@ -27,7 +27,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'upfiles.urls'
@@ -93,4 +93,10 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+LANGUAGE_CODE = 'pt-BR'
+LANGUAGES = [
+  ('pt-BR', 'Portuguese'),
+]
+
 

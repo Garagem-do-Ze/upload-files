@@ -3,39 +3,34 @@
 {% block content %}
 
 <script>
-  function openDocs(evt, cityName) {
-  // Declare all variables
+  function openDocs(evt, docType) {
   var i, tabcontent, tablinks;
 
-  // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
   }
 
-  // Get all elements with class="tablinks" and remove the class "active"
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
 
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
+  document.getElementById(docType).style.display = "block";
   evt.currentTarget.className += " active";
 } 
 </script>
 
-<div style="padding:7%">
+<div class="home_container">
   {% if user.is_authenticated %}
-    <div class="header">
-      </div>
+    <div class="header_container">
       <div class="header_name">
         Olá, {{ user.username }}.
       </div>
-      <div class="header_logout">
+      <div class="header_logout">        
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+      </div>
     </div>
-    
-    <p><a href="{% url 'logout' %}">Log Out</a></p>
     {% if user.username == 'cliente' %}
       <div class="docs">
         <div class="docs_title">
@@ -57,7 +52,7 @@
             <ul>
               <li>Cartão do Cidadão</li>
               <li>Recibo de vencimento (últimos três)</li>
-              <li>Morada (comprovativo (últimos três meses - luz / água / internet / telefone)</li>
+              <li>Morada - comprovativo (últimos três meses - luz / água / internet / telefone)</li>
               <li>IRS (Mod. 3)</li>
               <li>Comprovativo IBAN</li>
               <li>Tempo de empresa</li>
@@ -90,7 +85,7 @@
               <li>Códgo IRC</li>
               <li>Último balancete</li>
               <li>Comprovativo IBAN</li>
-              <li>Morada (comprovativo (últimos três meses - luz / água / internet / telefone)</li>
+              <li>Morada - comprovativo (últimos três meses - luz / água / internet / telefone)</li>
             </ul>
           </div>
           <div id="docs_list_socios" class="tabcontent">
@@ -100,27 +95,80 @@
             <ul>
               <li>CC / BI / Título de Residência</li>
               <li>Comprovativo IBAN</li>
-              <li>Morada (comprovativo (últimos três meses - luz / água / internet / telefone)</li>
+              <li>Morada - comprovativo (últimos três meses - luz / água / internet / telefone)</li>
               <li>IRS (Mod. 3)</li>
             </ul>
           </div>
-
         </div>
-
       </div>
 
       <div class="form_container">
         <form action="{% url 'up' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <br>
-          <p>Nome: <input type="text" name="first_name"></p>
-          <p>Sobrenome: <input type="text" name="second_name"></p>
-          <br>
-          <p>Nome do Documento: <input type="text" name="docname"></p>
-          <p>Selecione o arquivo:
-            <input type="file" name="docfile">
+          <p>
+            <label for="fisrt_name">
+              Nome:
+            </label> 
+            <input 
+              type="text" 
+              id="first_name" 
+              name="first_name" 
+              maxlength="80" 
+              required>
           </p>
-          <p><button type="submit">Upload</button></p>
+          <p>
+            <label for="second_name">
+              Sobrenome: 
+            </label>
+            <input 
+              type="text" 
+              id="second_name" 
+              name="second_name" 
+              maxlength="120" 
+              required>
+          </p>
+          <p>
+            <label for="email">
+              Email: 
+            </label>
+            <input type="text" name="email" maxlength="60" ></p>
+          <p>
+            <label>
+              Nome do Documento: 
+            </label>
+            <input 
+              type="email" 
+              id="docname"
+              name="docname">
+          </p>
+          <p>
+            <label for="docfile">
+              Selecione o arquivo:
+            </label>
+            <input 
+              type="file" 
+              id="docfile" 
+              name="docfile" 
+              class="btn btn-dark"
+              required
+            >
+          </p>
+          <p>
+            <div class="form_details">              
+              <label for="details">
+                  Detalhes adicionais: 
+              </label>
+              <textarea 
+                id="details" 
+                name="details" 
+                minlength="30" 
+                maxlength="40"
+                required>
+              </textarea>
+            </div>
+          </p>
+          <p><button class="btn btn-dark" type="submit">Enviar</button></p>
         </form>
       </div>
     {% endif %}

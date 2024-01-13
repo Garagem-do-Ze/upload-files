@@ -2,19 +2,19 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 
-<div style="
-  text-align: center;
-  margin: 5%; 
-  padding: 5%;
-  border-radius: 12px;
-  border: solid 1px rgb(28, 28, 39);
-">
-  <h2>Sign In</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-dark">Log In</button>
-  </form>
+<div class="login_container">
+  <div class="login_contour">
+    <div class="login_title">
+      <h2>Acesso</h2>
+    </div>
+    <div class="login_form">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-dark">Entrar</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

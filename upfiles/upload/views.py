@@ -13,13 +13,22 @@ def up(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             print (form.cleaned_data['docname'])
-            newdoc = Document(first_name=form.cleaned_data['first_name'], second_name=form.cleaned_data['second_name'], docname=form.cleaned_data['docname'], docfile = request.FILES['docfile'])
+            newdoc = Document(
+                first_name=form.cleaned_data['first_name'], 
+                second_name=form.cleaned_data['second_name'], 
+                email=form.cleaned_data['email'], 
+                docname=form.cleaned_data['docname'], 
+                docfile = request.FILES['docfile'],
+                details=form.cleaned_data['details']
+            )
             newdoc.save()
             return HttpResponseRedirect('')
         else:
             print (form.cleaned_data['first_name'])
             print (form.cleaned_data['second_name'])
+            print (form.cleaned_data['email'])
             print (form.cleaned_data['docname'])
+            print (form.cleaned_data['details'])
             
     else:
         form = DocumentForm()
