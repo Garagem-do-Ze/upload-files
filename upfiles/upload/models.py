@@ -9,4 +9,4 @@ class Document(models.Model):
     details = models.CharField(max_length=800, blank=True, null=True)
 
     def __str__(self):
-        return self.docname
+        return self.first_name + ' ' + self.second_name + ' (' + self.docname + ')'
