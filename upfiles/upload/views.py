@@ -3,11 +3,13 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from .forms import DocumentForm
 from .models import Document
+from django.views.decorators.csrf import csrf_protect
 
 def index(request):
     context = {"a":"a"}
     return render(request, "login/index.html", context)
 
+@csrf_protect
 def up(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
