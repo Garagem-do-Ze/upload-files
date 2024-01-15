@@ -101,12 +101,3 @@
 label {
   padding-right:8px;
 }
-
-label textarea{
-  vertical-align: middle;
-}
-
-.form_details {
-  display: flex;
-  align-items: center;
-}

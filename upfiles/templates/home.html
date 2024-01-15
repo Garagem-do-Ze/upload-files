@@ -134,13 +134,14 @@
             </label>
             <input type="text" name="email" maxlength="60" ></p>
           <p>
-            <label>
+            <label for="docname">
               Nome do Documento: 
             </label>
             <input 
-              type="email" 
+              type="text" 
               id="docname"
-              name="docname">
+              name="docname"
+              value="">
           </p>
           <p>
             <label for="docfile">
@@ -159,12 +160,12 @@
               <label for="details">
                   Detalhes adicionais: 
               </label>
-              <textarea 
+              <input 
+                type="text"
                 id="details" 
-                name="details" 
-                minlength="30" 
-                maxlength="40"
-                required>
+                name="details"
+                maxlength="800"
+                value="">
               </textarea>
             </div>
           </p>
